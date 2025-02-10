@@ -1,4 +1,5 @@
-__pycache__/
+__pycache__
 storage.db
 .vscode/
 venv/
+.pytest_cache
