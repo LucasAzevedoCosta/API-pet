@@ -1,12 +1,11 @@
 import re
 from src.models.sqlite.interfaces.people_repository import PeopleRepositoryInterface
+from .interfaces.person_creator_controller import PersonCreatorControllerInterface
 
 
-class PersonCreatorController:
+class PersonCreatorController(PersonCreatorControllerInterface):
     def __init__(self, people_repository: PeopleRepositoryInterface) -> None:
         self.__people_repository = people_repository
-
-
 
     def create(self, person_info: dict) -> dict:
         first_name = person_info["first_name"]
@@ -16,7 +15,7 @@ class PersonCreatorController:
 
         self.__validate_first_and_last_name(first_name, last_name)
         self.__insert_person_in_db(first_name, last_name, age, pet_id)
-        formated_response = self.__format_response
+        formated_response = self.__format_response(person_info)
         return formated_response
 
     def __validate_first_and_last_name(self, first_name: str, last_name: str) -> None:
